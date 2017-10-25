@@ -10,11 +10,21 @@ import (
 const (
 	blankFeature = `{
 		"type": "Feature",
-		"geometry": null,
+		"geometry": {
+			"type": "Point",
+			"coordinates": [ -43, -26 ]
+		},
 		"properties": null
 	}`
 
 	invalidFeatureType = `{}`
+
+	invalidGeometry = `{
+		"type": "Feature",
+		"geometry": {
+			"type": "invalid type"
+		}
+	}`
 )
 
 func TestFeature(t *testing.T) {
@@ -31,6 +41,10 @@ func TestFeature(t *testing.T) {
 		{
 			desc:    "invalid feature type",
 			payload: invalidFeatureType,
+		},
+		{
+			desc:    "invalid geometry",
+			payload: invalidGeometry,
 		},
 	}
 
