@@ -91,5 +91,3 @@ func checkGeometryType(geom *pgeojson.Geometry) error {
 
 	return InvalidGeometryTypeError
 }
-
-type Geometry geojson.Geometry
