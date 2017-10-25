@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package datakeeper;
+
+message Geojson {
+  message Geometry {
+    Type type = 1;
+
+    Coords point = 2;
+    MultiCoords multipoint = 3;
+    repeated MultiCoords polygon = 4;
+    // TODO Add all geometry types
+
+    enum Type {
+      Point = 0;
+      Multipoint = 1;
+      Linestring = 2;
+      Multilinestring = 3;
+      Polygon = 4;
+      Multipolygon = 5;
+      Geometrycollection = 6;
+    }
+  }
+
+  message Coords {
+    repeated double coords = 1 [packed = true];
+  }
+
+  message MultiCoords {
+    repeated Coords coords = 1;
+  }
+
+  message Feature {
+    Geometry geometry = 1;
+
+    map<string, BasicTypes> properties = 13; // pairs of key/value indexes
+  }
+
+  message BasicTypes {
+    oneof value_type {
+      string string_value = 1;
+      int64 int_value = 2;
+      double double_value = 3;
+      float float_value = 4;
+      bool bool_value = 5;
+    }
+  }
+}
